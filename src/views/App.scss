@@ -18,6 +18,12 @@
   font-size: large;
 }
 
+.logo {
+  width: 100px;
+  height: 100px;
+  background: url(../../images/loginLogo.png);
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
