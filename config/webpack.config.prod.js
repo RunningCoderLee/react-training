@@ -116,7 +116,8 @@ module.exports = {
           /\.html$/,
           /\.(js|jsx)$/,
           /\.css$/,
-          /\.scss$/,
+	  /\.scss$/,
+	  /\.less$/,
           /\.json$/,
           /\.svg$/
         ],
@@ -131,7 +132,11 @@ module.exports = {
         test: /\.(js|jsx)$/,
         include: paths.appSrc,
         loader: 'babel',
-
+        query: {
+          plugins: [
+            ['import', [{ libraryName: "antd", style: true }]],  // 加载 less 文件
+          ]
+        }
       },
       // The notation here is somewhat confusing.
       // "postcss" loader applies autoprefixer to our CSS.
@@ -167,6 +172,14 @@ module.exports = {
           'postcss',
           'sass'
         ])
+      },
+      {
+        test: /\.less$/,
+        loader: ExtractTextPlugin.extract(
+          'css?sourceMap&!' +
+          'postcss!' +
+          'less-loader?{"sourceMap":true,"modifyVars":{"@primary-color":"#1DA57A"}}'
+        ),
       },
       // JSON is not enabled by default in Webpack but both Node and Browserify
       // allow it implicitly so we also enable it.

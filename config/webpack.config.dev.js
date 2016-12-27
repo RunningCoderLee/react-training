@@ -25,7 +25,7 @@ var env = getClientEnvironment(publicUrl);
 module.exports = {
   // You may want 'eval' instead if you prefer to see the compiled output in DevTools.
   // See the discussion in https://github.com/facebookincubator/create-react-app/issues/343.
-  devtool: 'cheap-source-map',
+  devtool: 'cheap-module-source-map',
   // These are the "entry points" to our application.
   // This means they will be the "root" imports that are included in JS bundle.
   // The first two entry points enable "hot" CSS and auto-refreshes for JS.
@@ -110,7 +110,8 @@ module.exports = {
           /\.html$/,
           /\.(js|jsx)$/,
           /\.css$/,
-          /\.scss$/,
+	  /\.scss$/,
+	  /\.less$/,
           /\.json$/,
           /\.svg$/
         ],
@@ -130,7 +131,10 @@ module.exports = {
           // This is a feature of `babel-loader` for webpack (not Babel itself).
           // It enables caching results in ./node_modules/.cache/babel-loader/
           // directory for faster rebuilds.
-          cacheDirectory: true
+          cacheDirectory: true,
+          plugins: [
+            ['import', [{ libraryName: "antd", style: true }]],  // 加载 less 文件
+          ]
         }
       },
       // "postcss" loader applies autoprefixer to our CSS.
@@ -162,6 +166,11 @@ module.exports = {
           'sass?sourceMap=true'
         ]
       },
+      {
+        test: /\.less$/,
+        loader: 'style!css!postcss!less?{modifyVars:{"@primary-color":"#1DA57A"}}'
+      },
+      
       // JSON is not enabled by default in Webpack but both Node and Browserify
       // allow it implicitly so we also enable it.
       {

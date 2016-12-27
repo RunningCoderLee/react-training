@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
+import CSSModules from 'react-css-modules';
+import { Button } from 'antd';
 import logo from './logo.svg';
 import styles from './App.scss';
-import CSSModules from 'react-css-modules';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
   render() {
     return (
       <div styleName="App">
@@ -14,7 +19,8 @@ class App extends Component {
         <p styleName="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <div styleName="logo"></div>
+        <div styleName="logo" />
+        <Button type="primary">按钮</Button>
       </div>
     );
   }
