@@ -70,6 +70,7 @@ module.exports = {
     publicPath: publicPath
   },
   resolve: {
+    root: paths.root,
     // This allows you to set a fallback for where Webpack should look for modules.
     // We read `NODE_PATH` environment variable in `paths.js` and pass paths here.
     // We use `fallback` instead of `root` because we want `node_modules` to "win"
@@ -82,6 +83,13 @@ module.exports = {
     // https://github.com/facebookincubator/create-react-app/issues/290
     extensions: ['.js', '.json', '.jsx', ''],
     alias: {
+      Actions    : paths.appSrcActions,
+      Components : paths.appSrcComponents,
+      Config     : paths.config,
+      Router     : paths.appSrcRouter,
+      Stores     : paths.appSrcStores,
+      Styles     : paths.appSrcStyles,
+      Media      : paths.appSrcMedia,
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web'

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
-import App from '../components/App';
-import About from '../components/About';
-import Repos from '../components/Repos';
-import Repo from '../components/Repo';
-import Home from '../components/Home';
+import App from 'Components/test/App';
+import About from 'Components/test/About';
+import Repos from 'Components/test/Repos';
+import Repo from 'Components/test/Repo';
+import Home from 'Components/test/Home';
 
 const routes = (
   <Router history={browserHistory}>

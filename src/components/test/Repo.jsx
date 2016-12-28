@@ -1,5 +1,5 @@
 import React from 'react';
-import App from '../views/App';
+import App from './Content';
 
 const Repo = ({ params }) => (
   <div>

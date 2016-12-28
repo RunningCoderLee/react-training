@@ -25,7 +25,9 @@ var env = getClientEnvironment(publicUrl);
 module.exports = {
   // You may want 'eval' instead if you prefer to see the compiled output in DevTools.
   // See the discussion in https://github.com/facebookincubator/create-react-app/issues/343.
-  devtool: 'cheap-module-source-map',
+  // chrome 某些版本不支持在下一行的配置模式下断点调试，暂用inline代替cheap-module
+  devtool: 'cheap-module-eval-source-map',
+  // devtool: 'inline-eval-source-map',
   // These are the "entry points" to our application.
   // This means they will be the "root" imports that are included in JS bundle.
   // The first two entry points enable "hot" CSS and auto-refreshes for JS.
@@ -62,6 +64,7 @@ module.exports = {
     publicPath: publicPath
   },
   resolve: {
+    root: paths.root,
     // This allows you to set a fallback for where Webpack should look for modules.
     // We read `NODE_PATH` environment variable in `paths.js` and pass paths here.
     // We use `fallback` instead of `root` because we want `node_modules` to "win"
@@ -74,6 +77,13 @@ module.exports = {
     // https://github.com/facebookincubator/create-react-app/issues/290
     extensions: ['.js', '.json', '.jsx', ''],
     alias: {
+      Actions    : paths.appSrcActions,
+      Components : paths.appSrcComponents,
+      Config     : paths.config,
+      Router     : paths.appSrcRouter,
+      Stores     : paths.appSrcStores,
+      Styles     : paths.appSrcStyles,
+      Media      : paths.appSrcMedia,
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web'
@@ -170,7 +180,7 @@ module.exports = {
         test: /\.less$/,
         loader: 'style!css!postcss!less?{modifyVars:{"@primary-color":"#1DA57A"}}'
       },
-      
+
       // JSON is not enabled by default in Webpack but both Node and Browserify
       // allow it implicitly so we also enable it.
       {
